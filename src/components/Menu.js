@@ -1,16 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import sampleAction from '../actions/sampleAction'
+import sampleAction from '../actions/sampleAction';
 
-class Menu extends React.Component {
+const Menu = () => (<div>Menu Page</div>);
 
-    render(){
-        return (<div>Menu Page</div>)
-    }
-}
-
-const mapStateToProps = state=>({
-    ...state
+const mapStateToProps = state => ({
+  ...state,
 });
 
-export default connect(mapStateToProps,{sampleAction})(Menu)
+export default connect(mapStateToProps, { sampleAction })(Menu);

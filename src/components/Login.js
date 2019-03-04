@@ -1,16 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import sampleAction from '../actions/sampleAction'
+import sampleAction from '../actions/sampleAction';
 
-class Login extends React.Component {
+const Login = () => (<div>Login form</div>);
 
-    render(){
-        return (<div>Login form</div>)
-    }
-}
-
-const mapStateToProps = state=>({
-    ...state
+const mapStateToProps = state => ({
+  ...state,
 });
 
-export default connect(mapStateToProps,{sampleAction})(Login)
+export default connect(mapStateToProps, { sampleAction })(Login);
