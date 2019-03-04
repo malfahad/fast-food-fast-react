@@ -4,10 +4,10 @@ import ReactDOM from "react-dom";
 import { Provider } from 'react-redux'
 import configureStore from './store';
 
-import Login from './components/Login';
+import Routes from './Routes/index';
 
 ReactDOM.render(
   <Provider store={configureStore()}>
-    <Login /> 
+    <div><Routes/> </div>
   </Provider>
 , document.getElementById("index"));
