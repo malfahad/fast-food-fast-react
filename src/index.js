@@ -1,8 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Index = () => {
-  return <div>Hello React!</div>;
-};
+import { Provider } from 'react-redux'
+import configureStore from './store';
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+import Login from './components/Login';
+
+ReactDOM.render(
+  <Provider store={configureStore()}>
+    <Login /> 
+  </Provider>
+, document.getElementById("index"));
