@@ -1,0 +1,24 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "description": "",
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "fast-food-fast-react",
+  "scripts": {
+    "postdeploy": "yarn build",
+    "pr-predestroy": "yarn install"
+  },
+  "stack": "heroku-18"
+}
