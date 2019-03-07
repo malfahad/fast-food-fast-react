@@ -1,16 +1,18 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from '../components/Login';
 import Menu from '../components/Menu';
 import ProtectedRoute from './ProtectedRoute';
+import Register from '../components/Register';
 
 const Routes = () => (
-  <BrowserRouter>
+  <Router>
     <Switch>
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Register} />
       <ProtectedRoute path="/" redirectPath="/login" exact component={Menu} />
-      <Route path="/login" exact component={Login} />
     </Switch>
-  </BrowserRouter>
+  </Router>
 );
 
 export default Routes;
