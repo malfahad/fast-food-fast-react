@@ -3,5 +3,5 @@ import sampleReducer from './sampleReducer';
 
 
 export default combineReducers({
- sampleReducer
+  sampleReducer,
 });
