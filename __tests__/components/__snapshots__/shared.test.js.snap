@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppHeader should render without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`CustomerMenuButtons should render add button without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`CustomerMenuButtons should render default without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`Header should render without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`MenuForm should render without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`OrderSummary should render empty order without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`OrderSummary should render without crashing 1`] = `ShallowWrapper {}`;

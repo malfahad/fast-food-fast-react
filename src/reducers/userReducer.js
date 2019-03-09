@@ -1,6 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
+  isAdmin: false,
   authErrors: '',
   isLoggedIn: false,
   authorization: '',
@@ -17,6 +18,7 @@ const userReducer = (state = initialState, action) => {
     case actionTypes.AUTH_SUCCESS:
       return {
         ...state,
+        isAdmin: action.isAdmin,
         isLoggedIn: true,
         authErrors: '',
         authorization: action.payload,

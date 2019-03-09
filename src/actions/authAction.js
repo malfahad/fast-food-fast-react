@@ -2,8 +2,9 @@
 import actionTypes from './actionTypes';
 import { BASE_URL } from '../constants/index';
 
-const authAction = (isLogin, payload) => (dispatch) => {
-  const url = isLogin ? `${BASE_URL}/auth/login` : `${BASE_URL}/auth/register`;
+const authAction = (path, payload) => (dispatch) => {
+  const url = `${BASE_URL}/auth/${path}`;
+  const isAdmin = path.includes('admin');
 
   return fetch(url, {
     headers: {
@@ -19,11 +20,13 @@ const authAction = (isLogin, payload) => (dispatch) => {
           dispatch({
             type: actionTypes.AUTH_SUCCESS,
             payload: data.authorization,
+            isAdmin,
           });
         } else {
           dispatch({
             type: actionTypes.AUTH_FAILED,
             payload: data.error,
+            isAdmin,
           });
         }
       },

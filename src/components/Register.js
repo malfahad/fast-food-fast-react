@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import authAction from '../actions/authAction';
 
-class Register extends React.Component {
+export class Register extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.isLoggedIn) {
       localStorage.setItem('ff-token', nextProps.user.authorization);
@@ -21,7 +21,7 @@ class Register extends React.Component {
         email,
         password,
       };
-      this.props.authAction(false, payload);
+      this.props.authAction('register', payload);
     }
 
     render() {
@@ -34,7 +34,7 @@ class Register extends React.Component {
 
           <div className="content">
 
-            <form id="form-user-signup" onSubmit={this.handleSubmit} className="form-login" action="/">
+            <form id="form-user-signup" onSubmit={this.handleSubmit} className="form-signup" action="/">
               <h5 className="heading">Register a new account </h5>
               <p id="server-error" className="server-error">{this.props.user.authErrors}</p>
               <div className="form-group">
