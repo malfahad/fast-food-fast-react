@@ -5,8 +5,8 @@ import { Login } from '../../src/components/Login';
 describe('<Login/>', () => {
   it('should render without crashing', () => {
     const props = {
-      match:{
-        path:'/login'
+      match: {
+        path: '/login',
       },
       user: {
         authErrors: '',
@@ -18,8 +18,8 @@ describe('<Login/>', () => {
 
   it('should user login handleSubmit', () => {
     const props = {
-      match:{
-        path:'/login'
+      match: {
+        path: '/login',
       },
       user: {
         authErrors: '',
@@ -35,8 +35,8 @@ describe('<Login/>', () => {
 
   it('should admin login handleSubmit', () => {
     const props = {
-      match:{
-        path:'/login'
+      match: {
+        path: '/login',
       },
       user: {
         authErrors: '',
@@ -52,8 +52,8 @@ describe('<Login/>', () => {
 
   it('should navigate to home on receive props', () => {
     const props = {
-      match:{
-        path:'/login'
+      match: {
+        path: '/login',
       },
       user: {
         authErrors: '',
@@ -77,8 +77,8 @@ describe('<Login/>', () => {
 
   it('should not navigate to home on receive props', () => {
     const props = {
-      match:{
-        path:'/login'
+      match: {
+        path: '/login',
       },
       user: {
         authErrors: '',

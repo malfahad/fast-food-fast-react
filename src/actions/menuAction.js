@@ -14,4 +14,36 @@ export const fetchMenuAction = () => dispatch => fetch(
     });
   });
 
+
+export const removeFromMenu = id => dispatch => fetch(
+  `${BASE_URL}/menu/${id}`,
+  {
+    method: 'DELETE',
+    headers: { 'content-type': 'application/json', Authorization: localStorage.getItem('ff-token') },
+  },
+).then(res => res.json())
+  .then((data) => {
+    dispatch({
+      type: actionTypes.MENU_DELETE_SUCCESS,
+      payload: {
+        data,
+        id,
+      },
+    });
+  });
+
+
+export const addToMenu = body => dispatch => fetch(
+  `${BASE_URL}/menu`,
+  {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', Authorization: localStorage.getItem('ff-token') },
+    body: JSON.stringify(body),
+  },
+).then(res => res.json())
+  .then((data) => {
+    window.location.reload();
+  });
+
+
 export default fetchMenuAction;

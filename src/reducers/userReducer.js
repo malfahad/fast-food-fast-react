@@ -1,7 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  isAdmin: false,
+  isAdmin: (localStorage.getItem('ff-admin') !== null),
   authErrors: '',
   isLoggedIn: false,
   authorization: '',
