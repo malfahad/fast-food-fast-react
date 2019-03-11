@@ -16,6 +16,8 @@
       }
     },
     "name": "fast-food-fast-react",
-    "scripts": {},
+    "scripts": {
+      "start":"webpack --mode production"
+    },
     "stack": "heroku-18"
   }
