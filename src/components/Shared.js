@@ -28,7 +28,11 @@ export const AppHeader = props => (
 export const OrderItem = props => (
   <div className="menu-item">
     <img className="menu-item-img" alt="order item" src="https://cdn2.iconfinder.com/data/icons/bar-2/64/padnote-order-restaurant-writing_tool-512.png" />
-    <h4 className="heading menu-item-title"> Order number #100341 </h4>
+    <h4 className="heading menu-item-title">
+      {' '}
+      {`Order number #${props.id}`}
+      {' '}
+    </h4>
     <ul>
       {props.itemList.map(item => <li>{item}</li>)}
     </ul>
@@ -46,8 +50,16 @@ Ush
     <p>
 Order Status:
       {' '}
-      <span className="order-status completed">{props.status}</span>
-
+      {props.isAdmin ? (
+        <select className="select-order-status" onChange={props.onStatus}>
+          <option id={props.id} value="Created" selected={props.status === 'Created'}>Created</option>
+          <option id={props.id} value="Confirmed" selected={props.status === 'Confirmed'}>Confirmed</option>
+          <option id={props.id} value="Completed" selected={props.status === 'Completed'}>Completed</option>
+          <option id={props.id} value="Rejected" selected={props.status === 'Rejected'}>Rejected</option>
+        </select>
+      ) : (
+        <span className={`order-status ${props.status.toLowerCase()}`}>{props.status}</span>
+      )}
 
     </p>
   </div>

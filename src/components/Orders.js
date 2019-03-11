@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchOrders } from '../actions/orderActions';
+import { fetchOrders, updateOrderStatus } from '../actions/orderActions';
 import { AppHeader, OrderItem } from './Shared';
 
 export class Orders extends React.Component {
@@ -15,15 +15,26 @@ export class Orders extends React.Component {
       this.props.history.push(loginPath);
     }
 
+    onStatus = (e) => {
+      const { value, id } = e.target[e.target.selectedIndex];
+      if (value !== 'choose') this.props.updateOrderStatus(id, value);
+    }
+
     render() {
+      const { isAdmin } = this.props.user;
       const { orderHistory } = this.props;
       const orders = Object.values(orderHistory);
       orders.reverse();
+      const orderIds = Object.keys(orderHistory);
+      orderIds.reverse();
       const orderItems = orders.length < 1 ? <p>No past orders</p> : (
         <div>
           {
-          orders.map(order => (
+          orders.map((order, index) => (
             <OrderItem
+              id={orderIds[index]}
+              onStatus={this.onStatus}
+              isAdmin={isAdmin}
               status={order.status}
               total={order.total}
               itemList={order.items}
@@ -61,4 +72,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchOrders,
+  updateOrderStatus,
 })(Orders);

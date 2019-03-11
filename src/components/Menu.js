@@ -23,7 +23,7 @@ export class Menu extends React.Component {
     const items = Object.values(orderSummary).map(item => (
       `${item.count}x ${item.title} - ${item.subTotal}`
     ));
-    const status = 'CREATED';
+    const status = 'Created';
     const payload = { items, total, status };
     this.props.placeOrder(payload);
   }

@@ -41,5 +41,18 @@ export const placeOrder = order => () => fetch(
 )
   .then(res => res.json())
   .then(() => {
-    window.location = '/orders';
+    window.location.replace('/orders');
+  });
+
+export const updateOrderStatus = (id, status) => () => fetch(
+  `${BASE_URL}/orders/${id}`,
+  {
+    method: 'PUT',
+    body: JSON.stringify({ status }),
+    headers: { 'content-type': 'application/json', Authorization: localStorage.getItem('ff-token') },
+  },
+)
+  .then(res => res.json())
+  .then((data) => {
+    if (data.success) alert(data.success);
   });

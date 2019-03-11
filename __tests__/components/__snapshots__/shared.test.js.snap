@@ -10,6 +10,8 @@ exports[`Header should render without crashing 1`] = `ShallowWrapper {}`;
 
 exports[`MenuForm should render without crashing 1`] = `ShallowWrapper {}`;
 
+exports[`OrderItem should render without crashing 1`] = `ShallowWrapper {}`;
+
 exports[`OrderSummary should render empty order without crashing 1`] = `ShallowWrapper {}`;
 
 exports[`OrderSummary should render without crashing 1`] = `ShallowWrapper {}`;
