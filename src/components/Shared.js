@@ -7,7 +7,7 @@ const Header = () => (
   </div>
 );
 
-export const AppHeader = (props) => (
+export const AppHeader = props => (
   <div>
 
     <div className="heading-main">
@@ -37,10 +37,10 @@ export const OrderSummary = props => (
   </div>
 );
 
-export const MenuForm = () => (
+export const MenuForm = props => (
   <div className="column-small">
     <h3 className="heading">Add menu Item </h3>
-    <form id="form-menu-item" method="post" action="/" encType="application/x-www-form-urlencoded">
+    <form id="form-menu-item" onSubmit={props.onSubmit} action="/" encType="application/x-www-form-urlencoded">
       <p className="server-error" id="server-error" />
       <div className="form-group2 ">
         <input type="text" className="form-control2" placeholder="Menu Item Title" required id="menu-item-title" />
@@ -68,6 +68,11 @@ export const CustomerMenuButttons = props => (
     <p className="item-counter">{props.count > 0 ? `${props.count} added` : ''}</p>
     <button id={props.id} type="button" className="menu-item-button" onClick={props.onAdd} hidden={props.count >= 10}>Add</button>
     <button id={props.id} type="button" className="menu-item-button" onClick={props.onRemove} hidden={props.count < 1}>Remove</button>
+  </div>
+);
+export const AdminMenuButtons = props => (
+  <div>
+    <button id={props.id} type="button" className="menu-item-button" onClick={props.onRemoveFromMenu}>Remove from Menu</button>
   </div>
 );
 

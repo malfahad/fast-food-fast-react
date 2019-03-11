@@ -72,6 +72,10 @@ const menuReducer = (state = initialState, action) => {
         total: removeTotal,
       };
     }
+    case actionTypes.MENU_DELETE_SUCCESS: {
+      delete state.menu[action.payload.id];
+      return { ...state };
+    }
     default: return { ...state };
   }
 };

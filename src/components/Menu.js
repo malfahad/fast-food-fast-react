@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  AppHeader, OrderSummary, MenuForm, CustomerMenuButttons,
+  AppHeader, OrderSummary, MenuForm, AdminMenuButtons, CustomerMenuButttons,
 } from './Shared';
-import fetchMenuAction from '../actions/menuAction';
+import fetchMenuAction, { removeFromMenu, addToMenu } from '../actions/menuAction';
 import { addToOrder, removeFromOrder } from '../actions/orderActions';
 
 export class Menu extends React.Component {
@@ -15,12 +15,28 @@ export class Menu extends React.Component {
 
   onAdd = e => this.props.addToOrder(e.target.id);
 
-  logout = e =>{
+  onRemoveFromMenu = e => this.props.removeFromMenu(e.target.id);
+
+  onMenuSubmit = (e) => {
+    e.preventDefault();
+    const title = e.target[0].value;
+    const description = e.target[1].value;
+    const amount = e.target[2].value;
+    const img_url = e.target[3].value;
+    const body = {
+      title, description, amount, img_url,
+    };
+    this.props.addToMenu(body);
+  }
+
+  logout = (e) => {
     e.preventDefault();
     localStorage.removeItem('ff-token');
-    const loginPath = (this.props.user.isAdmin)?'/admin/login':'/login';
+    localStorage.removeItem('ff-admin');
+    const loginPath = (this.props.user.isAdmin) ? '/admin/login' : '/login';
     this.props.history.push(loginPath);
   }
+
   render() {
     const { isAdmin } = this.props.user;
     const { menu, orderSummary, total } = this.props.menuState;
@@ -46,26 +62,39 @@ UGX
           {menu[key].amount}
 
         </p>
-        <CustomerMenuButttons
-          id={key}
-          count={Object.prototype.hasOwnProperty.call(orderSummary, key)
-            ? orderSummary[key].count : 0}
-          onRemove={this.onRemove}
-          onAdd={this.onAdd}
-        />
+        {isAdmin ? (
+          <AdminMenuButtons
+            id={key}
+            onRemoveFromMenu={this.onRemoveFromMenu}
+          />
+        ) : (
+          <CustomerMenuButttons
+            id={key}
+            count={Object.prototype.hasOwnProperty.call(orderSummary, key)
+              ? orderSummary[key].count : 0}
+            onRemove={this.onRemove}
+            onAdd={this.onAdd}
+          />
+        )}
+
       </div>
     ));
 
-    const leftPane = isAdmin ? <MenuForm /> : (
-      <OrderSummary
-        orderSummary={Object.values(orderSummary)}
-        total={total}
-      />
-    );
+    const leftPane = isAdmin
+      ? (
+        <MenuForm
+          onSubmit={this.onMenuSubmit}
+        />
+      ) : (
+        <OrderSummary
+          orderSummary={Object.values(orderSummary)}
+          total={total}
+        />
+      );
 
     return (
       <div>
-        <AppHeader logout={this.logout}/>
+        <AppHeader logout={this.logout} />
         <div className="container">
           {leftPane}
           <div className="column-main">
@@ -90,4 +119,6 @@ export default connect(mapStateToProps, {
   fetchMenuAction,
   addToOrder,
   removeFromOrder,
+  removeFromMenu,
+  addToMenu,
 })(Menu);

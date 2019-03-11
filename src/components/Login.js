@@ -7,6 +7,9 @@ export class Login extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.isLoggedIn) {
       localStorage.setItem('ff-token', nextProps.user.authorization);
+      if (this.props.match.path.includes('admin')) {
+        localStorage.setItem('ff-admin', nextProps.user.authorization);
+      }
       this.props.history.push('/');
     }
   }
@@ -38,7 +41,7 @@ export class Login extends React.Component {
               <h5 className="heading">{heading}</h5>
               <p id="server-error" className="server-error">{this.props.user.authErrors}</p>
               <div className="form-group">
-                <input type="email" className="form-control" placeholder="Email" id="email" required />
+                <input type={(this.props.match.path === '/admin/login') ? 'text' : 'email'} className="form-control" placeholder={(this.props.match.path === '/admin/login') ? 'Username' : 'Email'} id="email" required />
               </div>
               <div className="form-group">
                 <input type="password" className="form-control" placeholder="Password" id="password" required />

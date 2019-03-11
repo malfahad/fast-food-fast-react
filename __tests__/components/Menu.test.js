@@ -64,8 +64,8 @@ describe('<Menu/>', () => {
       user: {
         isAdmin: false,
       },
-      history:{
-        push:jest.fn()
+      history: {
+        push: jest.fn(),
       },
       menuState: {
         menu: {
@@ -82,9 +82,9 @@ describe('<Menu/>', () => {
       addToOrder: jest.fn(),
       removeFromOrder: jest.fn(),
     };
-    localStorage.setItem('ff-token','sample.token.123')
+    localStorage.setItem('ff-token', 'sample.token.123');
     const wrapper = shallow(<Menu {...props} />);
-    wrapper.instance().logout({preventDefault:jest.fn()})
+    wrapper.instance().logout({ preventDefault: jest.fn() });
     expect(localStorage.getItem('ff-token')).toBeNull();
   });
 
@@ -115,5 +115,62 @@ describe('<Menu/>', () => {
     const wrapper = shallow(<Menu {...props} />);
     wrapper.instance().onRemove({ target: { id: 1 } });
     expect(wrapper.instance().props.removeFromOrder).toHaveBeenCalled();
+  });
+
+
+  it('should call removeFromMenu on remove', () => {
+    const props = {
+      user: {
+        isAdmin: true,
+      },
+      menuState: {
+        menu: {
+          1: {
+            title: 'Fries',
+            image_url: 'http://path.to/image',
+            amount: 1000,
+          },
+        },
+        orderSummary: {
+          1: {
+            count: 1,
+          },
+        },
+        total: 0,
+      },
+      fetchMenuAction: jest.fn(),
+      addToOrder: jest.fn(),
+      removeFromMenu: jest.fn(),
+    };
+    const wrapper = shallow(<Menu {...props} />);
+    wrapper.instance().onRemoveFromMenu({ target: { id: 1 } });
+    expect(wrapper.instance().props.removeFromMenu).toHaveBeenCalled();
+  });
+
+
+  it('should call menuSubmit on form submit', () => {
+    const props = {
+      user: {
+        isAdmin: true,
+      },
+      menuState: {
+        menu: {},
+      },
+      fetchMenuAction: jest.fn(),
+      addToMenu: jest.fn(),
+      removeFromMenu: jest.fn(),
+    };
+    const event = {
+      preventDefault: jest.fn(),
+      target: [
+        { value: 'Fries' },
+        { value: 'Fries are good' },
+        { value: '12000' },
+        { value: '/path/to/img.jpg' },
+      ],
+    };
+    const wrapper = shallow(<Menu {...props} />);
+    wrapper.instance().onMenuSubmit(event);
+    expect(wrapper.instance().props.addToMenu).toHaveBeenCalled();
   });
 });
