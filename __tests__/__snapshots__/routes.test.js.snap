@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Routes should render protected routes without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`Routes should render routes without crashing 1`] = `ShallowWrapper {}`;

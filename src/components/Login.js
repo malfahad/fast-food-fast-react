@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import authAction from '../actions/authAction';
 
-class Login extends React.Component {
+export class Login extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.isLoggedIn) {
       localStorage.setItem('ff-token', nextProps.user.authorization);
@@ -16,10 +16,16 @@ class Login extends React.Component {
       const email = e.target[0].value;
       const password = e.target[1].value;
       const payload = { email, password };
-      this.props.authAction(true, payload);
+      if (this.props.path.includes('admin')) {
+        this.props.authAction('admin/login', payload);
+      } else {
+        this.props.authAction('login', payload);
+      }
     }
 
     render() {
+      const heading = (this.props.path === '/admin/login') ? 'Admin login' : 'Sign into your account';
+
       return (
         <div>
           <div className="header">
@@ -29,7 +35,7 @@ class Login extends React.Component {
 
           <div className="content">
             <form id="form-user-login" onSubmit={this.handleSubmit} className="form-login">
-              <h5 className="heading">Sign into your account</h5>
+              <h5 className="heading">{heading}</h5>
               <p id="server-error" className="server-error">{this.props.user.authErrors}</p>
               <div className="form-group">
                 <input type="email" className="form-control" placeholder="Email" id="email" required />
@@ -51,6 +57,7 @@ New user?
       );
     }
 }
+
 
 const mapStateToProps = state => ({
   user: state.userReducer,
