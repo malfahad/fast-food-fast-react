@@ -46,7 +46,10 @@ module.exports = {
     template: './src/index.html',
     filename: './index.html',
   }),
-  new Dotenv(),
+  new Dotenv({
+    path: path.resolve(__dirname, '.env'),
+    systemvars: true,
+  }),
   ],
   devServer: {
     historyApiFallback: {

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Order your food fast",
   "main": "index.js",
+  "engines":{
+    "node":"10.14.1"
+  },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
