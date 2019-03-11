@@ -16,6 +16,23 @@ export class Orders extends React.Component {
     }
 
     render() {
+      const { orderHistory } = this.props;
+      const orders = Object.values(orderHistory);
+      orders.reverse();
+      const orderItems = orders.length < 1 ? <p>No past orders</p> : (
+        <div>
+          {
+          orders.map(order => (
+            <OrderItem
+              status={order.status}
+              total={order.total}
+              itemList={order.items}
+            />
+          ))
+        }
+        </div>
+      );
+
       return (
         <div>
           <AppHeader
@@ -26,8 +43,7 @@ export class Orders extends React.Component {
             <div className="column-wide">
               <h3 className="heading">My Order history</h3>
               <div id="orders-list">
-                <OrderItem />
-
+                {orderItems}
               </div>
             </div>
           </div>
@@ -40,6 +56,7 @@ export class Orders extends React.Component {
 const mapStateToProps = state => ({
   user: state.userReducer,
   menuState: state.menuReducer,
+  orderHistory: state.ordersReducer.orders,
 });
 
 export default connect(mapStateToProps, {

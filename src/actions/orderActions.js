@@ -23,12 +23,15 @@ export const fetchOrders = () => dispatch => fetch(
   .then(res => res.json())
   .then((data) => {
     if (data.data) {
-      console.log(data);
+      dispatch({
+        type: actionTypes.FETCH_ORDERS_SUCCESS,
+        payload: data.data,
+      });
     }
   });
 
 
-export const placeOrder = order => dispatch = fetch(
+export const placeOrder = order => () => fetch(
   `${BASE_URL}/orders`,
   {
     method: 'POST',
@@ -37,8 +40,6 @@ export const placeOrder = order => dispatch = fetch(
   },
 )
   .then(res => res.json())
-  .then((data) => {
-    if (data.data) {
-      console.log(data);
-    }
+  .then(() => {
+    window.location = '/orders';
   });

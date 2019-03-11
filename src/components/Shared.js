@@ -27,23 +27,27 @@ export const AppHeader = props => (
 
 export const OrderItem = props => (
   <div className="menu-item">
-    <img className="menu-item-img" src="http://placehold.it/200x200" />
+    <img className="menu-item-img" alt="order item" src="https://cdn2.iconfinder.com/data/icons/bar-2/64/padnote-order-restaurant-writing_tool-512.png" />
     <h4 className="heading menu-item-title"> Order number #100341 </h4>
     <ul>
-      <li>2x Order item 1 - 5,000</li>
-      <li>1x Order item 2 - 10,000</li>
-      <li>3x Order item 3 - 10,000</li>
+      {props.itemList.map(item => <li>{item}</li>)}
     </ul>
     <p>
 Total:
-      <span>Ush 25,000</span>
       {' '}
+      {' '}
+      <span>
+Ush
+        {props.total}
+      </span>
+
 
     </p>
     <p>
 Order Status:
-      <span className="order-status completed">Completed</span>
       {' '}
+      <span className="order-status completed">{props.status}</span>
+
 
     </p>
   </div>
@@ -58,7 +62,7 @@ export const OrderSummary = props => (
       ))}
     </ul>
     <h4 id="order-total">{props.total > 0 ? `Total Ush ${props.total}` : ''}</h4>
-    <button id="order-submit" type="button" className="menu-item-button" hidden={props.total === 0}>Submit Order</button>
+    <button id="order-submit" type="button" onClick={props.onOrderSubmit} className="menu-item-button" hidden={props.total === 0}>Submit Order</button>
   </div>
 );
 
