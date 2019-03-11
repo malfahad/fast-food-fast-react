@@ -23,7 +23,7 @@ export const performAdd = (id, summary, menuItem) => {
   }
   const combined = Object.values(summary).reduce((acc, item) => (
     { subTotal: acc.subTotal + item.subTotal }
-  ), 0);
+  ), { subTotal: 0 });
 
   return { addSummary: summary, addTotal: combined.subTotal };
 };
@@ -41,7 +41,7 @@ export const performRemove = (id, summary, menuItem) => {
   }
   const combined = Object.values(summary).reduce((acc, item) => (
     { subTotal: acc.subTotal + item.subTotal }
-  ), 0);
+  ), { subTotal: 0 });
 
   return { removeSummary: summary, removeTotal: combined.subTotal };
 };

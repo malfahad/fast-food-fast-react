@@ -173,4 +173,31 @@ describe('<Menu/>', () => {
     wrapper.instance().onMenuSubmit(event);
     expect(wrapper.instance().props.addToMenu).toHaveBeenCalled();
   });
+
+
+  it('should call placeOrder on orderSubmit', () => {
+    const props = {
+      user: {
+        isAdmin: true,
+      },
+      menuState: {
+        menu: {},
+        orderSummary: {
+          1: { title: 'Fries', subTotal: 2000, count: 2 },
+          2: { title: 'Soda', subTotal: 1000, count: 1 },
+        },
+        total: 3000,
+      },
+      fetchMenuAction: jest.fn(),
+      addToMenu: jest.fn(),
+      removeFromMenu: jest.fn(),
+      placeOrder: jest.fn(),
+    };
+    const event = {
+      preventDefault: jest.fn(),
+    };
+    const wrapper = shallow(<Menu {...props} />);
+    wrapper.instance().onOrderSubmit(event);
+    expect(wrapper.instance().props.placeOrder).toHaveBeenCalled();
+  });
 });

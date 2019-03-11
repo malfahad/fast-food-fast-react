@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Orders/> should render empty order list without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`<Orders/> should render orders list without crashing 1`] = `ShallowWrapper {}`;

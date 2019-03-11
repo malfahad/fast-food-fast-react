@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import Header, {
-  AppHeader, OrderSummary, MenuForm, CustomerMenuButttons,
+  AppHeader, OrderSummary, MenuForm, CustomerMenuButttons, OrderItem,
 } from '../../src/components/Shared';
 
 describe('Header', () => {
@@ -50,6 +50,18 @@ describe('OrderSummary', () => {
 describe('MenuForm', () => {
   it('should render without crashing', () => {
     const wrapper = shallow(<MenuForm />);
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+
+
+describe('OrderItem', () => {
+  it('should render without crashing', () => {
+    const props = {
+      itemList: [],
+      status: 'Created',
+    };
+    const wrapper = shallow(<OrderItem {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

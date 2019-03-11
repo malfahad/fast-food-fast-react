@@ -4,7 +4,7 @@ import {
   AppHeader, OrderSummary, MenuForm, AdminMenuButtons, CustomerMenuButttons,
 } from './Shared';
 import fetchMenuAction, { removeFromMenu, addToMenu } from '../actions/menuAction';
-import { addToOrder, removeFromOrder } from '../actions/orderActions';
+import { addToOrder, removeFromOrder, placeOrder } from '../actions/orderActions';
 
 export class Menu extends React.Component {
   componentWillMount() {
@@ -17,14 +17,25 @@ export class Menu extends React.Component {
 
   onRemoveFromMenu = e => this.props.removeFromMenu(e.target.id);
 
+  onOrderSubmit = (e) => {
+    e.preventDefault();
+    const { orderSummary, total } = this.props.menuState;
+    const items = Object.values(orderSummary).map(item => (
+      `${item.count}x ${item.title} - ${item.subTotal}`
+    ));
+    const status = 'Created';
+    const payload = { items, total, status };
+    this.props.placeOrder(payload);
+  }
+
   onMenuSubmit = (e) => {
     e.preventDefault();
     const title = e.target[0].value;
     const description = e.target[1].value;
     const amount = e.target[2].value;
-    const img_url = e.target[3].value;
+    const imgUrl = e.target[3].value;
     const body = {
-      title, description, amount, img_url,
+      title, description, amount, img_url: imgUrl,
     };
     this.props.addToMenu(body);
   }
@@ -87,6 +98,7 @@ UGX
         />
       ) : (
         <OrderSummary
+          onOrderSubmit={this.onOrderSubmit}
           orderSummary={Object.values(orderSummary)}
           total={total}
         />
@@ -121,4 +133,5 @@ export default connect(mapStateToProps, {
   removeFromOrder,
   removeFromMenu,
   addToMenu,
+  placeOrder,
 })(Menu);
