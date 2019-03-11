@@ -7,14 +7,14 @@ const Header = () => (
   </div>
 );
 
-export const AppHeader = () => (
+export const AppHeader = (props) => (
   <div>
 
     <div className="heading-main">
       <h1 className="heading">Fast Food Fast</h1>
       <h3 className="heading">Order page</h3>
       <ul>
-        <li className="btn btn-default logout"><a id="user-logout" href="login.html">Logout</a></li>
+        <li className="btn btn-default logout"><a id="user-logout" href="#" onClick={props.logout}>Logout</a></li>
         <li className="btn btn-default logout"><a href="orders-history.html">Order history</a></li>
       </ul>
     </div>

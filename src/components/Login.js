@@ -16,7 +16,7 @@ export class Login extends React.Component {
       const email = e.target[0].value;
       const password = e.target[1].value;
       const payload = { email, password };
-      if (this.props.path.includes('admin')) {
+      if (this.props.match.path.includes('admin')) {
         this.props.authAction('admin/login', payload);
       } else {
         this.props.authAction('login', payload);
@@ -24,7 +24,7 @@ export class Login extends React.Component {
     }
 
     render() {
-      const heading = (this.props.path === '/admin/login') ? 'Admin login' : 'Sign into your account';
+      const heading = (this.props.match.path === '/admin/login') ? 'Admin login' : 'Sign into your account';
 
       return (
         <div>
@@ -46,7 +46,7 @@ export class Login extends React.Component {
               <div className="form-group">
                 <input type="submit" className="form-control submit" value="Login" id="submit" />
               </div>
-              <p>
+              <p hidden={this.props.match.path === '/admin/login'}>
                 {' '}
 New user?
                 <Link to="/signup">Sign up</Link>

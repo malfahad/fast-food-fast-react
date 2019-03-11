@@ -8,9 +8,10 @@ import Register from '../components/Register';
 const Routes = () => (
   <Router>
     <Switch>
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Register} />
-      <ProtectedRoute path="/" redirectPath="/login" exact component={Menu} />
+    <Route path="/login" component={Login} />
+    <Route path="/admin/login" component={Login} />
+    <Route path="/signup" component={Register} />
+    <ProtectedRoute path="/" redirectPath="/login" exact component={Menu} />
     </Switch>
   </Router>
 );

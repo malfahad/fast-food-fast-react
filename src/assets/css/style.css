@@ -30,7 +30,7 @@ body {
   
   }
   
-  .form-login .form-signup {
+  .form-login {
     max-width: 50%;
     margin: auto;
     border: 2px solid;
@@ -38,6 +38,13 @@ body {
     border-color:#e32929;
   }
   
+  .form-signup {
+    max-width: 50%;
+    margin: auto;
+    border: 2px solid;
+    background-color: white;
+    border-color:#e32929;
+  }
   .form-group {
     padding: 2%;
     background-color: #ffb80b;
@@ -132,6 +139,7 @@ body {
     padding: inherit;
     overflow: auto;
   }
+
   .menu-item-button {
   float: right;
   margin: 5px;
@@ -142,6 +150,7 @@ body {
   text-decoration: none;
   
   }
+
   button:focus {
       outline:0px;
     }
