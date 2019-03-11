@@ -15,6 +15,7 @@ Fast food fast is a web platform that enables restaurant owners to accept food o
  User signup page `/register`  
  Admin login page `/admin/login`  
  Orders page `/orders`  
+ Menu page `/`  
 
 ### Sample app
 
