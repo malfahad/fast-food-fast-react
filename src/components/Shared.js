@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <div className="header">
@@ -9,18 +10,42 @@ const Header = () => (
 
 export const AppHeader = props => (
   <div>
-
     <div className="heading-main">
       <h1 className="heading">Fast Food Fast</h1>
-      <h3 className="heading">Order page</h3>
+      <h3 className="heading">{props.title}</h3>
       <ul>
         <li className="btn btn-default logout"><a id="user-logout" href="#" onClick={props.logout}>Logout</a></li>
-        <li className="btn btn-default logout"><a href="orders-history.html">Order history</a></li>
+        <li className="btn btn-default logout"><Link to="/orders">Order history</Link></li>
+        <li className="btn btn-default logout"><Link to="/">Menu</Link></li>
       </ul>
     </div>
 
     <div className="gap" />
 
+  </div>
+);
+
+export const OrderItem = props => (
+  <div className="menu-item">
+    <img className="menu-item-img" src="http://placehold.it/200x200" />
+    <h4 className="heading menu-item-title"> Order number #100341 </h4>
+    <ul>
+      <li>2x Order item 1 - 5,000</li>
+      <li>1x Order item 2 - 10,000</li>
+      <li>3x Order item 3 - 10,000</li>
+    </ul>
+    <p>
+Total:
+      <span>Ush 25,000</span>
+      {' '}
+
+    </p>
+    <p>
+Order Status:
+      <span className="order-status completed">Completed</span>
+      {' '}
+
+    </p>
   </div>
 );
 
