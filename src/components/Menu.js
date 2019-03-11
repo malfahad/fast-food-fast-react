@@ -15,6 +15,12 @@ export class Menu extends React.Component {
 
   onAdd = e => this.props.addToOrder(e.target.id);
 
+  logout = e =>{
+    e.preventDefault();
+    localStorage.removeItem('ff-token');
+    const loginPath = (this.props.user.isAdmin)?'/admin/login':'/login';
+    this.props.history.push(loginPath);
+  }
   render() {
     const { isAdmin } = this.props.user;
     const { menu, orderSummary, total } = this.props.menuState;
@@ -59,7 +65,7 @@ UGX
 
     return (
       <div>
-        <AppHeader />
+        <AppHeader logout={this.logout}/>
         <div className="container">
           {leftPane}
           <div className="column-main">

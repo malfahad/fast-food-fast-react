@@ -59,6 +59,34 @@ describe('<Menu/>', () => {
     wrapper.instance().onAdd({ target: { id: 1 } });
     expect(wrapper.instance().props.addToOrder).toHaveBeenCalled();
   });
+  it('should remove token on logout', () => {
+    const props = {
+      user: {
+        isAdmin: false,
+      },
+      history:{
+        push:jest.fn()
+      },
+      menuState: {
+        menu: {
+          1: {
+            title: 'Fries',
+            image_url: 'http://path.to/image',
+            amount: 1000,
+          },
+        },
+        orderSummary: {},
+        total: 0,
+      },
+      fetchMenuAction: jest.fn(),
+      addToOrder: jest.fn(),
+      removeFromOrder: jest.fn(),
+    };
+    localStorage.setItem('ff-token','sample.token.123')
+    const wrapper = shallow(<Menu {...props} />);
+    wrapper.instance().logout({preventDefault:jest.fn()})
+    expect(localStorage.getItem('ff-token')).toBeNull();
+  });
 
   it('should call removeFromOrder on remove', () => {
     const props = {
