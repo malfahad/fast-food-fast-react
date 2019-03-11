@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => (
   <div className="header">
@@ -9,18 +10,46 @@ const Header = () => (
 
 export const AppHeader = props => (
   <div>
-
     <div className="heading-main">
       <h1 className="heading">Fast Food Fast</h1>
-      <h3 className="heading">Order page</h3>
+      <h3 className="heading">{props.title}</h3>
       <ul>
         <li className="btn btn-default logout"><a id="user-logout" href="#" onClick={props.logout}>Logout</a></li>
-        <li className="btn btn-default logout"><a href="orders-history.html">Order history</a></li>
+        <li className="btn btn-default logout"><Link to="/orders">Order history</Link></li>
+        <li className="btn btn-default logout"><Link to="/">Menu</Link></li>
       </ul>
     </div>
 
     <div className="gap" />
 
+  </div>
+);
+
+export const OrderItem = props => (
+  <div className="menu-item">
+    <img className="menu-item-img" alt="order item" src="https://cdn2.iconfinder.com/data/icons/bar-2/64/padnote-order-restaurant-writing_tool-512.png" />
+    <h4 className="heading menu-item-title"> Order number #100341 </h4>
+    <ul>
+      {props.itemList.map(item => <li>{item}</li>)}
+    </ul>
+    <p>
+Total:
+      {' '}
+      {' '}
+      <span>
+Ush
+        {props.total}
+      </span>
+
+
+    </p>
+    <p>
+Order Status:
+      {' '}
+      <span className="order-status completed">{props.status}</span>
+
+
+    </p>
   </div>
 );
 
@@ -33,7 +62,7 @@ export const OrderSummary = props => (
       ))}
     </ul>
     <h4 id="order-total">{props.total > 0 ? `Total Ush ${props.total}` : ''}</h4>
-    <button id="order-submit" type="button" className="menu-item-button" hidden={props.total === 0}>Submit Order</button>
+    <button id="order-submit" type="button" onClick={props.onOrderSubmit} className="menu-item-button" hidden={props.total === 0}>Submit Order</button>
   </div>
 );
 

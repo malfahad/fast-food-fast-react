@@ -33,7 +33,7 @@ export const removeFromMenu = id => dispatch => fetch(
   });
 
 
-export const addToMenu = body => dispatch => fetch(
+export const addToMenu = body => () => fetch(
   `${BASE_URL}/menu`,
   {
     method: 'POST',
@@ -41,7 +41,7 @@ export const addToMenu = body => dispatch => fetch(
     body: JSON.stringify(body),
   },
 ).then(res => res.json())
-  .then((data) => {
+  .then(() => {
     window.location.reload();
   });
 

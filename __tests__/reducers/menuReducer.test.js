@@ -1,4 +1,4 @@
-import menuReducer, { performAdd, performRemove } from '../../src/reducers/menuReducer';
+import menuReducer from '../../src/reducers/menuReducer';
 import actionTypes from '../../src/actions/actionTypes';
 
 const initialState = {
@@ -41,16 +41,20 @@ describe('Menu Reducer', () => {
       payload: 1,
     };
     initialState.menu = {
-      1: { title: 'Fries', amount: 1000 },
+      1: { title: 'Fries', amount: 500 },
     };
 
-    const { addSummary, addTotal } = performAdd(action.payload,
-      initialState.orderSummary,
-      initialState.menu[action.payload]);
     const expectedState = {
       ...initialState,
-      orderSummary: addSummary,
-      total: addTotal,
+      orderSummary: {
+        1:
+      {
+        count: 1,
+        subTotal: 500,
+        title: 'Fries',
+      },
+      },
+      total: 500,
     };
     expect(menuReducer(initialState, action)).toEqual(expectedState);
   });
@@ -63,20 +67,19 @@ describe('Menu Reducer', () => {
       1: { title: 'Fries', amount: 1000 },
     };
 
-    const { addSummary, addTotal } = performAdd(action.payload,
-      initialState.orderSummary,
-      initialState.menu[action.payload]);
+    initialState.orderSummary = {
+      1:
+      {
+        count: 1,
+        subTotal: 500,
+        title: 'Fries',
+      },
+    };
 
-    initialState.orderSummary = addSummary;
-    initialState.total = addTotal;
-
-    const { removeSummary, removeTotal } = performRemove(action.payload,
-      initialState.orderSummary,
-      initialState.menu[action.payload]);
     const expectedState = {
       ...initialState,
-      orderSummary: removeSummary,
-      total: removeTotal,
+      orderSummary: {},
+      total: 0,
     };
     expect(menuReducer(initialState, action)).toEqual(expectedState);
   });
